@@ -1,0 +1,311 @@
+{
+  "info": {
+    "name": "News Agent API",
+    "description": "Collection for testing the News Agent API locally",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "news-agent"
+  },
+  "item": [
+    {
+      "name": "Health & Info",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["health"]
+            },
+            "description": "Check the health status of the news agent"
+          }
+        },
+        {
+          "name": "Root Endpoint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": [""]
+            },
+            "description": "Get API information and available endpoints"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Trigger RSS Scrape",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/api/admin/scrape/rss",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["api", "admin", "scrape", "rss"]
+            },
+            "description": "Manually trigger RSS feed scraping. Run this before summarizing news if you get 'No content to summarize' error."
+          }
+        },
+        {
+          "name": "Get System Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/api/admin/status",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["api", "admin", "status"]
+            },
+            "description": "Get system status including database stats and scraper configuration"
+          }
+        },
+        {
+          "name": "Get Feed Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5001/api/admin/feeds",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["api", "admin", "feeds"]
+            },
+            "description": "View configured RSS feeds and scraping intervals"
+          }
+        }
+      ]
+    },
+    {
+      "name": "A2A News Agent",
+      "item": [
+        {
+          "name": "Fetch Latest Headlines",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"req-001\",\n  \"method\": \"message/send\",\n  \"params\": {\n    \"message\": {\n      \"kind\": \"message\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"kind\": \"text\",\n          \"text\": \"fetch latest headlines\"\n        }\n      ],\n      \"messageId\": \"msg-001\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/a2a/news",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["a2a", "news"]
+            },
+            "description": "Fetch the latest news headlines from RSS feeds"
+          }
+        },
+        {
+          "name": "Summarize News",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"req-002\",\n  \"method\": \"message/send\",\n  \"params\": {\n    \"message\": {\n      \"kind\": \"message\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"kind\": \"text\",\n          \"text\": \"summarize the latest news\"\n        }\n      ],\n      \"messageId\": \"msg-002\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/a2a/news",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["a2a", "news"]
+            },
+            "description": "Get a summary of the latest news headlines"
+          }
+        },
+        {
+          "name": "Analyze Sentiment - AI",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"req-003\",\n  \"method\": \"message/send\",\n  \"params\": {\n    \"message\": {\n      \"kind\": \"message\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"kind\": \"text\",\n          \"text\": \"analyze sentiment on artificial intelligence\"\n        }\n      ],\n      \"messageId\": \"msg-003\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/a2a/news",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["a2a", "news"]
+            },
+            "description": "Analyze sentiment about artificial intelligence in recent news"
+          }
+        },
+        {
+          "name": "Analyze Sentiment - Technology",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"req-004\",\n  \"method\": \"message/send\",\n  \"params\": {\n    \"message\": {\n      \"kind\": \"message\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"kind\": \"text\",\n          \"text\": \"analyze sentiment on technology\"\n        }\n      ],\n      \"messageId\": \"msg-004\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/a2a/news",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["a2a", "news"]
+            },
+            "description": "Analyze sentiment about technology in recent news"
+          }
+        },
+        {
+          "name": "Ask Question - Technology",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"req-005\",\n  \"method\": \"message/send\",\n  \"params\": {\n    \"message\": {\n      \"kind\": \"message\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"kind\": \"text\",\n          \"text\": \"What are the latest developments in technology?\"\n        }\n      ],\n      \"messageId\": \"msg-005\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/a2a/news",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["a2a", "news"]
+            },
+            "description": "Ask a question about current events"
+          }
+        },
+        {
+          "name": "Get Help",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"req-006\",\n  \"method\": \"message/send\",\n  \"params\": {\n    \"message\": {\n      \"kind\": \"message\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"kind\": \"text\",\n          \"text\": \"help\"\n        }\n      ],\n      \"messageId\": \"msg-006\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/a2a/news",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["a2a", "news"]
+            },
+            "description": "Get help about available commands"
+          }
+        },
+        {
+          "name": "Execute - Multi-turn Conversation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"jsonrpc\": \"2.0\",\n  \"id\": \"req-007\",\n  \"method\": \"execute\",\n  \"params\": {\n    \"contextId\": \"ctx-001\",\n    \"taskId\": \"task-001\",\n    \"messages\": [\n      {\n        \"kind\": \"message\",\n        \"role\": \"user\",\n        \"parts\": [\n          {\n            \"kind\": \"text\",\n            \"text\": \"fetch latest headlines\"\n          }\n        ],\n        \"messageId\": \"msg-007\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5001/a2a/news",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "5001",
+              "path": ["a2a", "news"]
+            },
+            "description": "Execute a multi-turn conversation with context"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5001",
+      "type": "string"
+    }
+  ]
+}
+

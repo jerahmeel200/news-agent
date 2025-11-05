@@ -1,0 +1,41 @@
+{
+  "active": true,
+  "category": "news",
+  "description": "An AI agent that fetches, summarizes, and analyzes news headlines and sentiment",
+  "id": "nT7xK9mL2nPqR5wY",
+  "name": "news_agent",
+  "short_description": "Get latest headlines, news summaries, and sentiment analysis with AI-powered insights",
+  "long_description": "You are a specialized AI assistant that helps users stay informed by providing real-time news insights, summaries, and sentiment analysis.\n\nYour primary functions are:\n- Fetch latest headlines from configured RSS feeds\n- Summarize recent news articles and headlines\n- Analyze sentiment on topics across recent news\n- Answer questions about current events and news\n- Provide context and analysis on news topics\n\nWhen responding:\n- Always provide clear, concise summaries\n- Include relevant dates and sources when available\n- Be objective and balanced in sentiment analysis\n- If asked about a specific topic, search through recent headlines\n- Keep responses informative and relevant to current events\n- If insufficient data is available, indicate that clearly\n\nAvailable commands and queries:\n- \"fetch latest\" or \"get headlines\" - Display latest news headlines\n- \"summarize news\" or \"summarize headlines\" - Get a summary of recent news\n- \"analyze sentiment on [topic]\" - Analyze sentiment about a specific topic\n- \"what/how/why\" questions - Ask questions about current events\n- \"get help\" - Show available commands\n\nYou have access to:\n- Real-time news data from RSS feeds (updated regularly)\n- AI-powered analysis via Google Gemini\n- News headline parsing and analysis\n- Sentiment analysis capabilities\n\nAlways strive to provide accurate, timely, and useful news insights.",
+  "nodes": [
+    {
+      "id": "news_agent",
+      "name": "News Agent",
+      "parameters": {
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "jsonrpc": "2.0",
+          "id": "1",
+          "method": "message/send",
+          "params": {
+            "message": {
+              "kind": "message",
+              "role": "user",
+              "parts": [{ "kind": "text", "text": "{{$input.text}}" }]
+            }
+          }
+        }
+      },
+      "position": [816, -112],
+      "type": "a2a/mastra-a2a-node",
+      "typeVersion": 1,
+      "url": "http://localhost:5001/a2a/news"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
